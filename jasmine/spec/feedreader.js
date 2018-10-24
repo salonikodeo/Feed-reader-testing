@@ -103,4 +103,17 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+    describe('New Feed Selection', function() {
+        let preFeed;
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+                preFeed = $('.feed').html();
+                loadFeed(1, done);
+            });
+        });
+        /* Test if content actually changes */
+        it('is loaded and content changes', function() {
+            expect($('.feed').html()).not.toEqual(preFeed);
+        });
+    });
 }());
